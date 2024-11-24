@@ -30,7 +30,7 @@ git clone git@github.com:cotarr/collab-auth-dev-tools.git
 
 # list files
 ls -l
-``
+```
 
 - Confirm the directory listing shows both collab-auth and collab-auth-dev-tools in the same folder
 
