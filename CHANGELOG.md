@@ -1,5 +1,7 @@
 # Changelog
 
+- Add .gitignore
+
 ## 2024-11-24
 
 - Create new repository "collab-auth-dev-tools"

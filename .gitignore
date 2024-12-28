@@ -1,0 +1,9 @@
+node_modules
+*.bak
+*.PID
+push*
+notes.md
+*.tar
+.env
+logs
+

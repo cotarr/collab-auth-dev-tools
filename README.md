@@ -37,7 +37,7 @@ ls -l
 ```
 drwxr-xr-x 13 user1 user1 4096 Nov 23 15:56 collab-auth
 drwxr-xr-x  4 user1 user1 4096 Nov 23 15:37 collab-auth-dev-tools
-````
+```
 
 - Change directory to the collab-auth repository `cd collab-auth`
 - Inspect the .gitignore file in the collab-auth folder and confirm .gitignore contains "debug" as an excluded folder.
