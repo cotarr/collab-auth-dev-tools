@@ -1,6 +1,7 @@
 # Changelog
 
 - Add .gitignore
+- Add demo for OAuth 2.0 implicit grant type
 
 ## 2024-11-24
 

@@ -249,6 +249,16 @@ check_for_errors 3-code-grant-demo
 sleep 5
 
 # ---------------------
+# Test: code-grant-demo.js
+# ---------------------
+echo
+echo "Executing: node debug/implicit-grant-demo.js"
+sleep 5
+node ./debug/implicit-grant-demo.js
+check_for_errors 3A-implicit-grant-demo
+sleep 5
+
+# ---------------------
 # Test: login-form-submission.js
 # ---------------------
 echo

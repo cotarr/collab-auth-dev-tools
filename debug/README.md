@@ -74,6 +74,21 @@ LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
 LIMITS_WEB_RATE_LIMIT_COUNT=1000
 ```
 
+### debug/implicit-grant-demo.js
+
+This API test set is used to demonstrate and test the OAuth2 implicit grant workflow.
+
+Note: The OAuth 2.0 "implicit grant" is considered deprecated. 
+It is considered insecure because the access token is exposed in the URL.
+It is included here as part of learning how OAuth2 functions.
+
+```bash
+# Recommended test configuration
+LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000
+LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
+LIMITS_WEB_RATE_LIMIT_COUNT=1000
+```
+
 ### debug/access-token-client.js
 
 It is an overall test of access token validation for token 
@@ -427,6 +442,7 @@ node ./debug/admin-scope-check.js
 node ./debug/admin-user-edit.js
 node ./debug/client-grant-demo.js
 node ./debug/code-grant-demo.js
+node ./debug/implicit-grant-demo.js
 node ./debug/cookie-tests.js
 node ./debug/load-test-introspect.js
 node ./debug/login-form-submission.js
