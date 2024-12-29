@@ -40,6 +40,11 @@ function set_default_env
     export OAUTH2_CLIENT_TOKEN_EXPIRES_IN_SECONDS=1000
     export OAUTH2_EDITOR_SHOW_CLIENT_SECRET=false
     export DATABASE_DISABLE_WEB_ADMIN_PANEL=false
+    export OAUTH2_DISABLE_TOKEN_GRANT=false
+    export OAUTH2_DISABLE_CODE_GRANT=false
+    export OAUTH2_DISABLE_CLIENT_GRANT=false
+    export OAUTH2_DISABLE_PASSWORD_GRANT=false
+    export OAUTH2_DISABLE_REFRESH_TOKEN_GRANT=false
     export LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000
     export LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
     export LIMITS_WEB_RATE_LIMIT_COUNT=1000
@@ -54,6 +59,11 @@ function show_default_env
     echo "Config: OAUTH2_CLIENT_TOKEN_EXPIRES_IN_SECONDS=1000"
     echo "Config: OAUTH2_EDITOR_SHOW_CLIENT_SECRET=false"
     echo "Config: DATABASE_DISABLE_WEB_ADMIN_PANEL=false"
+    echo "Config: OAUTH2_DISABLE_TOKEN_GRANT=false"
+    echo "Config: OAUTH2_DISABLE_CODE_GRANT=false"
+    echo "Config: OAUTH2_DISABLE_CLIENT_GRANT=false"
+    echo "Config: OAUTH2_DISABLE_PASSWORD_GRANT=false"
+    echo "Config: OAUTH2_DISABLE_REFRESH_TOKEN_GRANT=false"
     echo "Config: LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000"
     echo "Config: LIMITS_TOKEN_RATE_LIMIT_COUNT=1000"
     echo "Config: LIMITS_WEB_RATE_LIMIT_COUNT=1000"
@@ -377,6 +387,36 @@ sleep 5
 # Restart node server with alternate configuration
 # -------------------------------------------------
 echo
+echo "OAUTH2_DISABLE_TOKEN_GRANT=true/"
+echo "OAUTH2_DISABLE_CODE_GRANT=true"
+echo "OAUTH2_DISABLE_CLIENT_GRANT=true"
+echo "OAUTH2_DISABLE_PASSWORD_GRANT=true"
+echo "OAUTH2_DISABLE_REFRESH_TOKEN_GRANT=true"
+echo
+stop_server
+set_default_env
+export OAUTH2_DISABLE_TOKEN_GRANT=true
+export OAUTH2_DISABLE_CODE_GRANT=true
+export OAUTH2_DISABLE_CLIENT_GRANT=true
+export OAUTH2_DISABLE_PASSWORD_GRANT=true
+export OAUTH2_DISABLE_REFRESH_TOKEN_GRANT=true
+restart_server
+sleep 5
+
+# ---------------------
+# Test: disabled-types.js
+# ---------------------
+echo
+echo "Executing: node debug/disabled-types.js"
+sleep 5
+node ./debug/disabled-types.js
+check_for_errors 14-disabled-types
+sleep 5
+
+# -------------------------------------------------
+# Restart node server with alternate configuration
+# -------------------------------------------------
+echo
 echo "Config: OAUTH2_CLIENT_TOKEN_EXPIRES_IN_SECONDS=10"
 echo
 stop_server
@@ -392,7 +432,7 @@ echo
 echo "Executing: node debug/access-token-client.js"
 sleep 5
 node ./debug/access-token-client.js
-check_for_errors 14-access-token-client
+check_for_errors 15-access-token-client
 sleep 5
 
 # -------------------------------------------------
@@ -402,8 +442,6 @@ echo
 echo "Config: OAUTH2_AUTH_CODE_EXPIRES_IN_SECONDS=8"
 echo "Config: OAUTH2_TOKEN_EXPIRES_IN_SECONDS=10"
 echo "Config: OAUTH2_REFRESH_TOKEN_EXPIRES_IN_SECONDS=15"
-
-
 echo
 stop_server
 set_default_env
@@ -420,7 +458,7 @@ echo
 echo "Executing: node debug/access-token-user.js"
 sleep 5
 node ./debug/access-token-user.js
-check_for_errors 15-access-token-user
+check_for_errors 16-access-token-user
 sleep 5
 
 # -------------------------------------------------
@@ -444,7 +482,7 @@ echo
 echo "Executing: node debug/cookie-tests.js"
 sleep 5
 node ./debug/cookie-tests.js
-check_for_errors 16-cookie-tests
+check_for_errors 17-cookie-tests
 sleep 5
 
 # -------------------------------------------------
@@ -468,7 +506,7 @@ echo
 echo "Executing: node debug/cookie-tests.js"
 sleep 5
 node ./debug/cookie-tests.js
-check_for_errors 17-cookie-tests
+check_for_errors 18-cookie-tests
 sleep 5
 
 
@@ -495,7 +533,7 @@ echo
 echo "Executing: node debug/rate-limit.js"
 sleep 5
 node ./debug/rate-limit.js
-check_for_errors 18-rate-limit
+check_for_errors 19-rate-limit
 sleep 5
 
 
@@ -522,7 +560,7 @@ echo
 echo "Executing: node load-test-introspect.js"
 sleep 5
 node ./debug/load-test-introspect.js
-check_for_errors 19-load-test-introspect
+check_for_errors 20-load-test-introspect
 sleep 5
 
 # -------------------------------------------------
@@ -547,7 +585,7 @@ echo
 echo "Executing: node redirect-timing-debug.js"
 sleep 5
 node ./debug/redirect-timing-debug.js
-check_for_errors 20-redirect-timing-debug
+check_for_errors 21-redirect-timing-debug
 sleep 5
 
 # ---------------------
@@ -557,7 +595,7 @@ echo
 echo "Executing: node clear-database.js"
 sleep 5
 node ./debug/clear-database.js
-check_for_errors 21-clear-database
+check_for_errors 22-clear-database
 sleep 5
 
 # --------

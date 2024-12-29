@@ -208,6 +208,23 @@ LIMITS_WEB_RATE_LIMIT_COUNT=1000
     SITE_SECURITY_EXPIRES="Fri, 1 Apr 2022 08:00:00 -0600"
 ```
 
+### debug/disabled-types.js
+
+This script will confirm that disabled grant types are 
+not functional when in a disabled state.
+
+```bash
+OAUTH2_DISABLE_TOKEN_GRANT=true
+OAUTH2_DISABLE_CODE_GRANT=true
+OAUTH2_DISABLE_CLIENT_GRANT=true
+OAUTH2_DISABLE_PASSWORD_GRANT=true
+OAUTH2_DISABLE_REFRESH_TOKEN_GRANT=true
+# Recommended test configuration
+LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000
+LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
+LIMITS_WEB_RATE_LIMIT_COUNT=1000
+```
+
 ### debug/protected-routes.js
 
 This script will confirm that protected routes are blocked when 
@@ -464,6 +481,7 @@ node ./debug/load-test-introspect.js
 node ./debug/login-form-submission.js
 node ./debug/protected-routes.js
 node ./debug/public-routes.js
+node ./debug/disabled-types.js
 node ./debug/rate-limit.js
 node ./debug/redirect-timing-debug.js
 ```

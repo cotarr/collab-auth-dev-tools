@@ -107,7 +107,7 @@ setup(chainObj)
   })
 
   // -----------------------------------------
-  // 2 POST /oauth/token - Get access_token using client credentials
+  // 2 POST /oauth/token - Get access_token using password grant
   //
   // This will submit POST request with a set of client
   // credentials as basic auth along with username and password 
@@ -119,7 +119,7 @@ setup(chainObj)
   // -----------------------------------------
   .then((chain) => {
     chain.testDescription =
-      '2 POST /oauth/token - Get access_token using client credentials';
+      '2 POST /oauth/token - Get access_token using password grant';
     chain.requestMethod = 'POST';
     chain.requestFetchURL = encodeURI(testEnv.authURL + '/oauth/token');
     chain.requestAuthorization = 'basic';
