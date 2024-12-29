@@ -4,8 +4,8 @@ This "debug/" folder contains a set of JavaScript files that can be used to
 debug and test the collab-auth web server application. 
 This debug/README.md file includes instructions for running these tests.
 
-Note: OAuth 2 grant types Implicit Grant and Password Grant are excluded
-from these tests because these are generally considered deprecated.
+Note: OAuth 2 grant types Implicit Grant and Password Grant are  considered deprecated.
+The runner includes a demo of each for learning purposes.
 
 ## List of scripts
 
@@ -81,6 +81,21 @@ This API test set is used to demonstrate and test the OAuth2 implicit grant work
 Note: The OAuth 2.0 "implicit grant" is considered deprecated. 
 It is considered insecure because the access token is exposed in the URL.
 It is included here as part of learning how OAuth2 functions.
+
+```bash
+# Recommended test configuration
+LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000
+LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
+LIMITS_WEB_RATE_LIMIT_COUNT=1000
+```
+
+### debug/password-grant-demo.js
+
+This API test set is used to demonstrate and test the OAuth2 password grant workflow.
+
+Note: The OAuth 2.0 "password grant" is considered deprecated. 
+It is considered insecure because it requires the client application
+to store the user's password directly.
 
 ```bash
 # Recommended test configuration
@@ -443,6 +458,7 @@ node ./debug/admin-user-edit.js
 node ./debug/client-grant-demo.js
 node ./debug/code-grant-demo.js
 node ./debug/implicit-grant-demo.js
+node ./debug/password-grant-demo.js
 node ./debug/cookie-tests.js
 node ./debug/load-test-introspect.js
 node ./debug/login-form-submission.js

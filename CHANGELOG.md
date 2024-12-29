@@ -2,6 +2,7 @@
 
 - Add .gitignore
 - Add demo for OAuth 2.0 implicit grant type
+- Add demo for OAuth 2.0 password grant type
 
 ## 2024-11-24
 

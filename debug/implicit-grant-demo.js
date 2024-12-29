@@ -1,4 +1,4 @@
-// code-grant-demo.js
+// implicit-grant-demo.js
 //
 // This API test set is used to demonstrate and test the OAuth2 implicit grant workflow.
 //
@@ -22,7 +22,7 @@ const assert = require('node:assert');
 const fs = require('node:fs');
 
 if (!fs.existsSync('./package.json')) {
-  console.log('Must be run from repository base folder as: node debug/code-grant-demo.js');
+  console.log('Must be run from repository base folder as: node debug/implicit-grant-demo.js');
   process.exit(1);
 }
 
@@ -32,6 +32,19 @@ const {
   // clients,
   // users
 } = require('./modules/import-config.js');
+
+//
+// Check if OAuth 2.0 grant type implicit grant is disabled in configuration
+//
+if (config.oauth2.disableTokenGrant) {
+  // Yes, abort the test without error
+  console.log('\nTest skipped, implicit grant disabled in configuration.');
+  console.log('---------------------');
+  console.log('  All Tests Passed');
+  console.log('---------------------');
+  process.exit(0);
+}
+
 const managedFetch = require('./modules/managed-fetch').managedFetch;
 const {
   logRequest,
@@ -55,7 +68,6 @@ const setup = (chain) => {
     Buffer.from(testEnv.clientId + ':' +
     testEnv.clientSecret).toString('base64');
   chain.parsedAccessToken = null;
-  chain.parsedRefreshToken = null;
   return Promise.resolve(chain);
 };
 
@@ -418,26 +430,20 @@ setup(chainObj)
 
 
   // --------------------------------------------------
-  // 8 POST /oauth/token/revoke - Revoke access_token and refresh_token
+  // 8 POST /oauth/token/revoke - Revoke access_token
   // --------------------------------------------------
   .then((chain) => {
     chain.testDescription =
-      '8 POST /oauth/token/revoke - Revoke access_token and refresh_token';
+      '8 POST /oauth/token/revoke - Revoke access_token';
     chain.requestMethod = 'POST';
     chain.requestFetchURL = encodeURI(testEnv.authURL + '/oauth/token/revoke');
-    if (config.oauth2.disableRefreshTokenGrant) {
-      chain.abortManagedFetch = true;
-      chain.skipInlineTests = true;
-      return Promise.resolve(chain);
-    } else {
-      chain.requestAuthorization = 'basic';
-      chain.requestAcceptType = 'application/json';
-      chain.requestContentType = 'application/json';
-      chain.requestBody = {
-        access_token: chain.parsedAccessToken
-      };
-      return Promise.resolve(chain);
-    }
+    chain.requestAuthorization = 'basic';
+    chain.requestAcceptType = 'application/json';
+    chain.requestContentType = 'application/json';
+    chain.requestBody = {
+      access_token: chain.parsedAccessToken
+    };
+    return Promise.resolve(chain);
   })
   .then((chain) => managedFetch(chain))
   //
@@ -464,19 +470,13 @@ setup(chainObj)
     chain.testDescription = '9 - POST /oauth/introspect - Confirm token revoked';
     chain.requestMethod = 'POST';
     chain.requestFetchURL = encodeURI(testEnv.authURL + '/oauth/introspect');
-    if (config.oauth2.disableRefreshTokenGrant) {
-      chain.abortManagedFetch = true;
-      chain.skipInlineTests = true;
-      return Promise.resolve(chain);
-    } else {
-      chain.requestAuthorization = 'basic';
-      chain.requestAcceptType = 'application/json';
-      chain.requestContentType = 'application/json';
-      chain.requestBody = {
-        access_token: chain.parsedAccessToken
-      };
-      return Promise.resolve(chain);
-    }
+    chain.requestAuthorization = 'basic';
+    chain.requestAcceptType = 'application/json';
+    chain.requestContentType = 'application/json';
+    chain.requestBody = {
+      access_token: chain.parsedAccessToken
+    };
+    return Promise.resolve(chain);
   })
   .then((chain) => managedFetch(chain))
   //
@@ -656,6 +656,40 @@ setup(chainObj)
     showJwtMetaData(chain);
 
     return Promise.resolve(chain);
+  })
+
+  // --------------------------------------------------
+  // 13 POST /oauth/token/revoke - Revoke access_token
+  // --------------------------------------------------
+  .then((chain) => {
+    chain.testDescription =
+      '13 POST /oauth/token/revoke - Revoke access_token';
+    chain.requestMethod = 'POST';
+    chain.requestFetchURL = encodeURI(testEnv.authURL + '/oauth/token/revoke');
+    chain.requestAuthorization = 'basic';
+    chain.requestAcceptType = 'application/json';
+    chain.requestContentType = 'application/json';
+    chain.requestBody = {
+      access_token: chain.parsedAccessToken
+    };
+    return Promise.resolve(chain);
+  })
+  .then((chain) => managedFetch(chain))
+  //
+  // Assertion Tests...
+  //
+  .then((chain) => {
+    if (chain.skipInlineTests) {
+      delete chain.skipInlineTests;
+      return Promise.resolve(chain);
+    } else {
+      logRequest(chain);
+      // console.log(JSON.stringify(chain.responseRawData, null, 2));
+
+      console.log('\tExpect: status === 200');
+      assert.strictEqual(chain.responseStatus, 200);
+      return Promise.resolve(chain);
+    }
   })
 
   //

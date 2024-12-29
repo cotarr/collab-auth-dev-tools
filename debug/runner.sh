@@ -19,7 +19,7 @@ export SERVER_PID_FILENAME="$PID_FILENAME"
 
 # Used to log script failure when exit code not 0
 LOG_DATE=$(date +%s)
-LOG_FILENAME="$PID_DIR/runner_log_$LOG_DATE.txt"
+LOG_FILENAME="$PID_DIR/collab_auth_runner_log_$LOG_DATE.txt"
 echo "Script debug/runner.sh error log" > $LOG_FILENAME
 echo "Date: $(date --rfc-3339=seconds)" >> $LOG_FILENAME
 echo >> $LOG_FILENAME
@@ -249,14 +249,25 @@ check_for_errors 3-code-grant-demo
 sleep 5
 
 # ---------------------
-# Test: code-grant-demo.js
+# Test: implicit-grant-demo.js
 # ---------------------
 echo
 echo "Executing: node debug/implicit-grant-demo.js"
 sleep 5
 node ./debug/implicit-grant-demo.js
-check_for_errors 3A-implicit-grant-demo
+check_for_errors 4-implicit-grant-demo
 sleep 5
+
+# ---------------------
+# Test: password-grant-demo.js
+# ---------------------
+echo
+echo "Executing: node debug/password-grant-demo.js"
+sleep 5
+node ./debug/password-grant-demo.js
+check_for_errors 5-password-grant-demo
+sleep 5
+
 
 # ---------------------
 # Test: login-form-submission.js
@@ -265,7 +276,7 @@ echo
 echo "Executing: node debug/login-form-submission.js"
 sleep 5
 node ./debug/login-form-submission.js
-check_for_errors 4-login-form-submission
+check_for_errors 6-login-form-submission
 sleep 5
 
 # ---------------------
@@ -275,7 +286,7 @@ echo
 echo "Executing: node debug/protected-routes.js"
 sleep 5
 node ./debug/protected-routes.js
-check_for_errors 5-protected-routes
+check_for_errors 7-protected-routes
 sleep 5
 
 # ---------------------
@@ -285,7 +296,7 @@ echo
 echo "Executing: node debug/public-routes.js"
 sleep 5
 node ./debug/public-routes.js
-check_for_errors 6-public-routes
+check_for_errors 8-public-routes
 sleep 5
 
 # ---------------------
@@ -295,7 +306,7 @@ echo
 echo "Executing: node debug/admin-user-edit.js"
 sleep 5
 node ./debug/admin-user-edit.js
-check_for_errors 7-admin-user-edit
+check_for_errors 9-admin-user-edit
 sleep 5
 
 # ---------------------
@@ -305,7 +316,7 @@ echo
 echo "Executing: node debug/admin-access-check.js"
 sleep 5
 node ./debug/admin-access-check.js
-check_for_errors 8-admin-access-check
+check_for_errors 10-admin-access-check
 sleep 5
 
 # ---------------------
@@ -315,7 +326,7 @@ echo
 echo "Executing: node debug/admin-scope-check.js"
 sleep 5
 node ./debug/admin-scope-check.js
-check_for_errors 9-admin-scope-check
+check_for_errors 11-admin-scope-check
 sleep 5
 
 # -------------------------------------------------
@@ -337,7 +348,7 @@ echo
 echo "Executing: node debug/admin-client-edit.js"
 sleep 5
 node ./debug/admin-client-edit.js
-check_for_errors 10-admin-client-edit
+check_for_errors 12-admin-client-edit
 sleep 5
 
 # -------------------------------------------------
@@ -359,7 +370,7 @@ echo
 echo "Executing: node debug/admin-disabled.js"
 sleep 5
 node ./debug/admin-disabled.js
-check_for_errors 11-admin-disabled
+check_for_errors 13-admin-disabled
 sleep 5
 
 # -------------------------------------------------
@@ -381,7 +392,7 @@ echo
 echo "Executing: node debug/access-token-client.js"
 sleep 5
 node ./debug/access-token-client.js
-check_for_errors 12-access-token-client
+check_for_errors 14-access-token-client
 sleep 5
 
 # -------------------------------------------------
@@ -409,7 +420,7 @@ echo
 echo "Executing: node debug/access-token-user.js"
 sleep 5
 node ./debug/access-token-user.js
-check_for_errors 13-access-token-user
+check_for_errors 15-access-token-user
 sleep 5
 
 # -------------------------------------------------
@@ -433,7 +444,7 @@ echo
 echo "Executing: node debug/cookie-tests.js"
 sleep 5
 node ./debug/cookie-tests.js
-check_for_errors 14-cookie-tests
+check_for_errors 16-cookie-tests
 sleep 5
 
 # -------------------------------------------------
@@ -457,7 +468,7 @@ echo
 echo "Executing: node debug/cookie-tests.js"
 sleep 5
 node ./debug/cookie-tests.js
-check_for_errors 15-cookie-tests
+check_for_errors 17-cookie-tests
 sleep 5
 
 
@@ -484,7 +495,7 @@ echo
 echo "Executing: node debug/rate-limit.js"
 sleep 5
 node ./debug/rate-limit.js
-check_for_errors 16-rate-limit
+check_for_errors 18-rate-limit
 sleep 5
 
 
@@ -511,7 +522,7 @@ echo
 echo "Executing: node load-test-introspect.js"
 sleep 5
 node ./debug/load-test-introspect.js
-check_for_errors 17-load-test-introspect
+check_for_errors 19-load-test-introspect
 sleep 5
 
 # -------------------------------------------------
@@ -536,7 +547,7 @@ echo
 echo "Executing: node redirect-timing-debug.js"
 sleep 5
 node ./debug/redirect-timing-debug.js
-check_for_errors 18-redirect-timing-debug
+check_for_errors 20-redirect-timing-debug
 sleep 5
 
 # ---------------------
@@ -546,7 +557,7 @@ echo
 echo "Executing: node clear-database.js"
 sleep 5
 node ./debug/clear-database.js
-check_for_errors 19-clear-database
+check_for_errors 21-clear-database
 sleep 5
 
 # --------
