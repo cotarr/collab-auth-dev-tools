@@ -26,11 +26,23 @@ if (!fs.existsSync('./package.json')) {
 }
 
 const {
-  testEnv
-  // config,
+  testEnv,
+  config,
   // clients,
   // users
 } = require('./modules/import-config.js');
+
+//
+// Check if OAuth 2.0 grant type client credentials grant is disabled in configuration
+//
+if (config.oauth2.disableClientGrant) {
+  // Yes, abort the test without error
+  console.log('\nTest skipped, client credentials grant disabled in configuration.');
+  console.log('---------------------');
+  console.log('  All Tests Passed');
+  console.log('---------------------');
+  process.exit(0);
+}
 
 const managedFetch = require('./modules/managed-fetch').managedFetch;
 
