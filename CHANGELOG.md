@@ -1,5 +1,9 @@
 # Changelog
 
+## 2024-12-29
+
+This update expands the custom API tests as follows:
+
 - Add .gitignore
 - Add demo for OAuth 2.0 implicit grant type
 - Add demo for OAuth 2.0 password grant type
@@ -7,7 +11,7 @@
 - Disable client token tests when client credentials grant is disabled
 - Add test to confirm disabled grant type are not functional
 - Add test to confirm client credentials grant requires valid clientId and clientSecret
-- Add test to confirm authorization code grant requires valid credentials
+- Add test to Add test to confirm authorization code grant requires valid credentials
 
 ## 2024-11-24
 
