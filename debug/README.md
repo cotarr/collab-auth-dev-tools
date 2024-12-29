@@ -208,6 +208,18 @@ LIMITS_WEB_RATE_LIMIT_COUNT=1000
     SITE_SECURITY_EXPIRES="Fri, 1 Apr 2022 08:00:00 -0600"
 ```
 
+### debug/client-no-auth.js
+
+This script will verify that client credentials grant requests 
+without proper authentication (clientId, clientSecret) are denied.
+
+```bash
+# Recommended test configuration
+LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000
+LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
+LIMITS_WEB_RATE_LIMIT_COUNT=1000
+```
+
 ### debug/disabled-types.js
 
 This script will confirm that disabled grant types are 
@@ -481,6 +493,7 @@ node ./debug/load-test-introspect.js
 node ./debug/login-form-submission.js
 node ./debug/protected-routes.js
 node ./debug/public-routes.js
+node ./debug/client-no-auth.js
 node ./debug/disabled-types.js
 node ./debug/rate-limit.js
 node ./debug/redirect-timing-debug.js

@@ -5,7 +5,8 @@
 - Add demo for OAuth 2.0 password grant type
 - Change load-test-introspect.js to generate access token by code grant instead of client credentials grant.
 - Disable client token tests when client credentials grant is disabled
-- Add test to confirm disabled grant type are not founctional
+- Add test to confirm disabled grant type are not functional
+- Add test to confirm client credentials grant requires valid clientId and clientSecret
 
 ## 2024-11-24
 
