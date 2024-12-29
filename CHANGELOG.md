@@ -7,6 +7,7 @@
 - Disable client token tests when client credentials grant is disabled
 - Add test to confirm disabled grant type are not functional
 - Add test to confirm client credentials grant requires valid clientId and clientSecret
+- Add test to confirm authorization code grant requires valid credentials
 
 ## 2024-11-24
 

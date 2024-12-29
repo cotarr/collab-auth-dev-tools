@@ -220,6 +220,18 @@ LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
 LIMITS_WEB_RATE_LIMIT_COUNT=1000
 ```
 
+### debug/code-no-auth.js
+
+This script will confirm that invalid credentials will be denied
+during the Authorization Code Grant workflow
+
+```bash
+# Recommended test configuration
+LIMITS_PASSWORD_RATE_LIMIT_COUNT=1000
+LIMITS_TOKEN_RATE_LIMIT_COUNT=1000
+LIMITS_WEB_RATE_LIMIT_COUNT=1000
+```
+
 ### debug/disabled-types.js
 
 This script will confirm that disabled grant types are 
@@ -494,6 +506,7 @@ node ./debug/login-form-submission.js
 node ./debug/protected-routes.js
 node ./debug/public-routes.js
 node ./debug/client-no-auth.js
+node ./debug/code-no-auth.js
 node ./debug/disabled-types.js
 node ./debug/rate-limit.js
 node ./debug/redirect-timing-debug.js
